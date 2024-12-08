@@ -7,7 +7,7 @@ class EventScheduler:
     def __init__(self, root):
         self.root = root
         self.root.title("EventAlchemy")
-        self.root.geometry("800x600")
+        self.root.geometry("800x800")
         self.conn = get_db_connection()
         self.current_user = None
         self.login_screen()
@@ -26,6 +26,7 @@ class EventScheduler:
     # Authentication Screens
     def login_screen(self):
         self.clear_screen()
+        tk.Label(self.root, text="EventAlchemy", font=("Arial", 24)).pack(pady=10)
         tk.Label(self.root, text="Login", font=("Arial", 24)).pack(pady=20)
         tk.Label(self.root, text="Username").pack()
         self.username_entry = tk.Entry(self.root)
@@ -84,8 +85,8 @@ class EventScheduler:
     # Main Menu
     def main_menu(self):
         self.clear_screen()
-        tk.Label(self.root, text="EventAlchemy", font=("Arial", 24)).pack(pady=20)
-        tk.Label(self.root, text="Transforming Events into Experiences.", font=("Arial", 10)).pack(pady=20)
+        tk.Label(self.root, text="EventAlchemy", font=("Arial", 24)).pack(pady=10)
+        tk.Label(self.root, text="Transforming Events into Experiences.", font=("Arial", 10)).pack(pady=3)
         tk.Button(self.root, text="Add Event", command=self.add_event).pack(pady=5)
         tk.Button(self.root, text="View Events", command=self.view_events).pack(pady=5)
         tk.Button(self.root, text="Modify Event", command=self.modify_event).pack(pady=5)
