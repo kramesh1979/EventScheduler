@@ -1,8 +1,6 @@
 import tkinter as tk
-from tkinter import ttk, messagebox
-from mysql.connector import Error
+from tkinter import messagebox
 from db_connection import get_db_connection
-from datetime import datetime
 
 class EventScheduler:
     def __init__(self, root):
@@ -63,7 +61,7 @@ class EventScheduler:
             result = cursor.fetchone()
             if result:
                 self.current_user = result[0]
-                self.main_screen()
+                self.main_menu()
             else:
                 self.show_error("Login Failed", "Invalid credentials!")
         except Error as e:
@@ -83,104 +81,40 @@ class EventScheduler:
             self.show_error("Error", f"Database error: {e}")
 
     # Main Menu
-    def main_screen(self):
+    def main_menu(self):
         self.clear_screen()
         tk.Label(self.root, text="Event Scheduler", font=("Arial", 24)).pack(pady=20)
-        tk.Button(self.root, text="Add Event", command=self.add_event_screen).pack(pady=5)
-        tk.Button(self.root, text="View Events", command=self.view_events_screen).pack(pady=5)
-        tk.Button(self.root, text="Logout", command=self.login_screen).pack(pady=5)
 
-    # Add Event
-    def add_event_screen(self):
-        self.clear_screen()
-        tk.Label(self.root, text="Add Event", font=("Arial", 24)).pack(pady=20)
+        tk.Button(self.root, text="Add Event", command=self.add_event).pack(pady=5)
+        tk.Button(self.root, text="View Events", command=self.view_events).pack(pady=5)
+        tk.Button(self.root, text="Modify Event", command=self.modify_event).pack(pady=5)
+        tk.Button(self.root, text="Delete Event", command=self.delete_event).pack(pady=5)
+        tk.Button(self.root, text="Update User Info", command=self.update_user_info).pack(pady=5)
+        tk.Button(self.root, text="Logout", command=self.login_screen).pack(pady=10)
 
-        tk.Label(self.root, text="Event Name").pack()
-        self.event_name_entry = tk.Entry(self.root)
-        self.event_name_entry.pack()
-
-        tk.Label(self.root, text="Event Date (YYYY-MM-DD)").pack()
-        self.event_date_entry = tk.Entry(self.root)
-        self.event_date_entry.pack()
-
-        tk.Label(self.root, text="Event Time (HH:MM)").pack()
-        self.event_time_entry = tk.Entry(self.root)
-        self.event_time_entry.pack()
-
-        tk.Label(self.root, text="Description").pack()
-        self.description_entry = tk.Entry(self.root)
-        self.description_entry.pack()
-
-        tk.Button(self.root, text="Add Event", command=self.add_event).pack(pady=10)
-        tk.Button(self.root, text="Back", command=self.main_screen).pack()
-
+    # Load each module from separate scripts
     def add_event(self):
-        event_name = self.event_name_entry.get()
-        event_date = self.event_date_entry.get()
-        event_time = self.event_time_entry.get()
-        description = self.description_entry.get()
-        try:
-            cursor = self.conn.cursor()
-            query = """INSERT INTO events (user_id, event_name, event_date, event_time, description)
-                       VALUES (%s, %s, %s, %s, %s)"""
-            cursor.execute(query, (self.current_user, event_name, event_date, event_time, description))
-            self.conn.commit()
-            self.show_info("Success", "Event added successfully!")
-            self.main_screen()
-        except Error as e:
-            self.show_error("Error", f"Database error: {e}")
+        import add_event  # Import add_event script
+        add_event.run(self)
 
-    # View Events
-    def view_events_screen(self):
-        self.clear_screen()
-        tk.Label(self.root, text="My Events", font=("Arial", 24)).pack(pady=20)
-        frame = tk.Frame(self.root)
-        frame.pack()
+    def modify_event(self):
+        import modify_event  # Import modify_event script
+        modify_event.run(self)
 
-        tree = ttk.Treeview(frame, columns=("Name", "Date", "Time", "Description"), show="headings")
-        tree.heading("Name", text="Event Name")
-        tree.heading("Date", text="Date")
-        tree.heading("Time", text="Time")
-        tree.heading("Description", text="Description")
-        tree.pack()
+    def view_events(self):
+        # Placeholder for view events
+        pass
 
-        try:
-            cursor = self.conn.cursor()
-            query = "SELECT event_name, event_date, event_time, description FROM events WHERE user_id = %s"
-            cursor.execute(query, (self.current_user,))
-            events = cursor.fetchall()
-            for event in events:
-                tree.insert("", "end", values=event)
-        except Error as e:
-            self.show_error("Error", f"Database error: {e}")
+    def delete_event(self):
+        # Placeholder for delete event
+        pass
 
-        tk.Button(self.root, text="Delete Selected Event", command=lambda: self.delete_event(tree)).pack(pady=10)
-        tk.Button(self.root, text="Back", command=self.main_screen).pack()
-
-    # Delete Event
-    def delete_event(self, tree):
-        selected_item = tree.selection()
-        if not selected_item:
-            self.show_error("Error", "No event selected!")
-            return
-
-        try:
-            event_values = tree.item(selected_item)["values"]
-            event_name, event_date = event_values[0], event_values[1]
-
-            cursor = self.conn.cursor()
-            query = """DELETE FROM events WHERE user_id = %s AND event_name = %s AND event_date = %s"""
-            cursor.execute(query, (self.current_user, event_name, event_date))
-            self.conn.commit()
-            self.show_info("Success", "Event deleted successfully!")
-            self.view_events_screen()
-        except Error as e:
-            self.show_error("Error", f"Database error: {e}")
+    def update_user_info(self):
+        # Placeholder for updating user info
+        pass
 
 
 if __name__ == "__main__":
     root = tk.Tk()
     app = EventScheduler(root)
     root.mainloop()
-    
-    
