@@ -1,3 +1,4 @@
+from configparser import Error
 import tkinter as tk
 from tkinter import messagebox
 from db_connection import get_db_connection

@@ -1,3 +1,4 @@
+from configparser import Error
 import tkinter as tk
 from tkinter import messagebox
 from db_connection import get_db_connection
@@ -5,7 +6,7 @@ from db_connection import get_db_connection
 class EventScheduler:
     def __init__(self, root):
         self.root = root
-        self.root.title("Event Scheduler")
+        self.root.title("EventAlchemy")
         self.root.geometry("800x600")
         self.conn = get_db_connection()
         self.current_user = None
@@ -83,8 +84,8 @@ class EventScheduler:
     # Main Menu
     def main_menu(self):
         self.clear_screen()
-        tk.Label(self.root, text="Event Scheduler", font=("Arial", 24)).pack(pady=20)
-
+        tk.Label(self.root, text="EventAlchemy", font=("Arial", 24)).pack(pady=20)
+        tk.Label(self.root, text="Transforming Events into Experiences.", font=("Arial", 10)).pack(pady=20)
         tk.Button(self.root, text="Add Event", command=self.add_event).pack(pady=5)
         tk.Button(self.root, text="View Events", command=self.view_events).pack(pady=5)
         tk.Button(self.root, text="Modify Event", command=self.modify_event).pack(pady=5)
@@ -102,17 +103,16 @@ class EventScheduler:
         modify_event.run(self)
 
     def view_events(self):
-        # Placeholder for view events
-        pass
+        import view_events  # Import view_events script
+        view_events.run(self)
 
     def delete_event(self):
-        # Placeholder for delete event
-        pass
+        import delete_event  # Import delete_event script
+        delete_event.run(self)
 
     def update_user_info(self):
         # Placeholder for updating user info
         pass
-
 
 if __name__ == "__main__":
     root = tk.Tk()
