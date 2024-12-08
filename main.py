@@ -169,7 +169,8 @@ class EventScheduler:
         """
         Placeholder function for updating user information. Implement logic as needed.
         """
-        pass
+        import update_userinfo #Import update_userinfo script
+        update_userinfo.run(self)
 
 if __name__ == "__main__":
     root = Tk()

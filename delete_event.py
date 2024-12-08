@@ -22,6 +22,10 @@ def run(main_app):
 
     # Function to delete an event from the database
     def delete_event(event_id):
+        if not event_id:
+            show_info("Info", "No events to delete")  # Show info message if no event is selected
+            return
+        
         try:
             cursor = main_app.conn.cursor()  # Get a cursor object from the database connection
             query = "DELETE FROM events WHERE event_id = %s"
@@ -54,8 +58,12 @@ def run(main_app):
         events = cursor.fetchall()  # Fetch all events from the result set
         event_map = {tree.insert("", "end", values=(event[1], event[2], event[3], event[4])): event[0] for event in events}
         # Bind the Delete action to the selected event in the Treeview
-        tree.bind("<Delete>", lambda e: delete_event(event_map[e.widget.selection()[0]]))
+        tree.bind("<Delete>", lambda e: delete_event(event_map.get(tree.selection(), None)))
     except Error as e:
         show_error("Error", f"Database error: {e}")
 
+    # Add a Delete button to delete the selected event
+    delete_button = tk.Button(root, text="Delete Selected Event", command=lambda: delete_event(event_map.get(tree.selection()[0], None)))
+    delete_button.pack(pady=10)
+    
     tk.Button(root, text="Back to Menu", command=main_app.main_menu).pack()  # Button to return to the main menu

@@ -49,7 +49,7 @@ def run(main_app):
 
         # Validate the event date to ensure it is in the future
         try:
-            event_date_dt = datetime.strptime(event_date, "%m-%d-%Y")  # Parse date string into a datetime object
+            event_date_dt = datetime.strptime(event_date, "%Y-%m-%d")  # Parse date string into a datetime object
             event_date_only = event_date_dt.date()  # Extract only the date portion
             if event_date_only < datetime.now().date():  # Check if the date is in the past
                 raise ValueError("Kindly choose future dates to schedule an event.")  # Custom error message
@@ -79,7 +79,7 @@ def run(main_app):
     event_name_entry.pack()
 
     # Input field for event date
-    tk.Label(root, text="Event Date (MM-DD-YYYY)").pack()
+    tk.Label(root, text="Event Date (YYYY-MM-DD)").pack()
     event_date_entry = tk.Entry(root)
     event_date_entry.pack()
 
