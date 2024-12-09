@@ -1,7 +1,7 @@
 from configparser import Error  # Import Error class for handling configuration errors
 import tkinter as tk  # Import tkinter for GUI creation
 from tkinter import messagebox  # Import messagebox for pop-up alerts
-from db_connection import get_db_connection  # Import the database connection utility
+from sql.db_connection import get_db_connection  # Import the database connection utility
 from datetime import datetime  # Import datetime for handling and validating date and time
 
 def run(main_app):

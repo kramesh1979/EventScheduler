@@ -1,5 +1,5 @@
 from tkinter import messagebox, Tk, Label, Entry, Button, Frame
-from db_connection import get_db_connection  # Import the database connection utility
+from sql.db_connection import get_db_connection  # Import the database connection utility
 
 class EventScheduler:
     def __init__(self, root):
@@ -133,44 +133,45 @@ class EventScheduler:
         Button(button_frame, text="View Events", command=self.view_events).pack(pady=5, side='left', padx=10)
         Button(button_frame, text="Modify Event", command=self.modify_event).pack(pady=5, side='left', padx=10)
         Button(button_frame, text="Delete Event", command=self.delete_event).pack(pady=5, side='left', padx=10)
-        Button(button_frame, text="Update User Info", command=self.update_user_info).pack(pady=5, side='left', padx=10)
+        # Button(button_frame, text="Update User Info", command=self.update_user_info).pack(pady=5, side='left', padx=10)
 
         Button(frame, text="Logout", command=self.login_screen).pack(pady=10, side='top')
+
     # Load each module from separate scripts
     def add_event(self):
         """
         Imports the 'add_event' script and runs the 'run' function within it.
         """
-        import add_event  # Import add_event script
-        add_event.run(self)
+        import dashboard.add_event  # Import add_event script
+        dashboard.add_event.run(self)
 
     def modify_event(self):
         """
         Imports the 'modify_event' script and runs the 'run' function within it.
         """
-        import modify_event  # Import modify_event script
-        modify_event.run(self)
+        import dashboard.modify_event  # Import modify_event script
+        dashboard.modify_event.run(self)
 
     def view_events(self):
         """
         Imports the 'view_events' script and runs the 'run' function within it.
         """
-        import view_events  # Import view_events script
-        view_events.run(self)
+        import dashboard.view_events  # Import view_events script
+        dashboard.view_event.run(self)
 
     def delete_event(self):
         """
         Imports the 'delete_event' script and runs the 'run' function within it.
         """
-        import delete_event  # Import delete_event script
-        delete_event.run(self)
+        import dashboard.delete_event  # Import delete_event script
+        dashboard.delete_event.run(self)
 
-    def update_user_info(self):
-        """
-        Placeholder function for updating user information. Implement logic as needed.
-        """
-        import update_userinfo #Import update_userinfo script
-        update_userinfo.run(self)
+    # def update_user_info(self):
+    #     """
+    #     Placeholder function for updating user information. Implement logic as needed.
+    #     """
+    #     import dashboard.update_userinfo  # Import update_userinfo script
+    #     dashboard.update_userinfo.run(self)
 
 if __name__ == "__main__":
     root = Tk()

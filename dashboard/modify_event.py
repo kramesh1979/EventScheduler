@@ -1,7 +1,7 @@
 from configparser import Error
 import tkinter as tk
 from tkinter import ttk, messagebox
-from db_connection import get_db_connection
+from sql.db_connection import get_db_connection
 
 def run(main_app):
     """

@@ -2,7 +2,7 @@ from configparser import Error  # Import Error class for handling configuration-
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
-from db_connection import get_db_connection  # Import the database connection utility
+from sql.db_connection import get_db_connection  # Import the database connection utility
 
 def run(main_app):
     root = main_app.root  # Reference to the root Tkinter window of the main application

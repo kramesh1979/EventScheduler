@@ -1,12 +1,12 @@
 # Import the main EventScheduler class, which is the central application.
-from main import EventScheduler
+from auth.main import EventScheduler
 
 # Import individual functionalities from their respective scripts. These are modular functions that
 # handle specific parts of the application, like adding, modifying, viewing, and deleting events.
-from add_event import run as add_event
-from modify_event import run as modify_event
-from view_events import run as view_events
-from delete_event import run as delete_event
+from dashboard.add_event import run as add_event
+from dashboard.modify_event import run as modify_event
+from dashboard.view_events import run as view_events
+from dashboard.delete_event import run as delete_event
 
 # Import the Tk class from tkinter, which is used to create the graphical user interface (GUI).
 from tkinter import Tk
