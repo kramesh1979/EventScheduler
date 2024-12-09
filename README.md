@@ -28,36 +28,32 @@ EventAlchemy is an intuitive and reliable application designed for easy event sc
 
    ### Steps to Run Locally
 
-   1. Clone the Repository:
+1. Clone the Repository:
 
-   ```bash
-   git clone https://github.com/username/EventScheduler.git
-   cd EventScheduler```
+`git clone https://github.com/username/EventScheduler.git`
+`cd EventScheduler`
 
-	2. Set Up MySQL Database:
+2. Set Up MySQL Database:
       •	Create a new MySQL database named event_scheduler.
       •	Import the provided SQL schema into this database.
 
-	3.	Install Required Python Packages:
+3. Install Required Python Packages:
+   
+`pip install mysql-connector-python`
 
-   ```bash
-   pip install mysql-connector-python```
-
-   4.	Run the Application:
+5. Run the Application:
 
       •	Ensure your MySQL database credentials are correctly set up in the db_connection.py file.
       •	Run the main application script:
-      ```bash
-      python start.py
+   `python start.py`
 
-   5.	Usage:
+6. Usage:
          •	Launch the application to interact with the EventAlchemy interface.
          •	Use the provided options to add, view, update, or delete events.
          •	Manage user profiles and event scheduling seamlessly.
 
 ## Contributing
-
-	•	Contributions are welcome! If you would like to contribute to the project, please follow these steps:
+Contributions are welcome! If you would like to contribute to the project, please follow these steps:
          1.	Fork the repository.
          2.	Create a new branch (git checkout -b feature-branch).
          3.	Make your changes.
@@ -66,7 +62,7 @@ EventAlchemy is an intuitive and reliable application designed for easy event sc
 
 ##  License
 
-	•	This project is licensed under the MIT License. See the LICENSE file for more details.
+This project is licensed under the MIT License. See the LICENSE file for more details.
 
 ## Contact
 
