@@ -8,7 +8,7 @@ class EventScheduler:
         geometry, establishes the database connection, and starts the login screen.
         """
         self.root = root
-        self.root.title("Event Alchemy")
+        self.root.title("EventAlchemy")
         self.root.geometry("800x600")
         self.conn = get_db_connection()  # Establish database connection
         self.current_user = None  # To store the ID of the current user
@@ -122,7 +122,7 @@ class EventScheduler:
         frame.pack(expand=True, fill='both')
 
         # Centering the title
-        Label(frame, text="Event Alchemy", font=("Arial", 24)).pack(pady=10, side='top')
+        Label(frame, text="EventAlchemy", font=("Arial", 24)).pack(pady=10, side='top')
         Label(frame, text="Transforming Events into Experiences", font=("Arial", 10)).pack(pady=5, side='top')
     
         # Buttons to manage events, centered horizontally
