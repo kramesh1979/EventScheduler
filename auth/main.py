@@ -42,7 +42,7 @@ class EventScheduler:
         """
         self.clear_screen()
         
-        Label(self.root, text="Login", font=("Arial", 24)).pack(pady=20)
+        Label(self.root, text="Welcome to EventAlchemy", font=("Arial", 24)).pack(pady=20)
         Label(self.root, text="Username").pack()
         self.username_entry = Entry(self.root)
         self.username_entry.pack()
@@ -51,8 +51,13 @@ class EventScheduler:
         self.password_entry = Entry(self.root, show="*")
         self.password_entry.pack()
 
-        Button(self.root, text="Login", command=self.login).pack(pady=10)
-        Button(self.root, text="Register", command=self.register_screen).pack()
+        # Button(self.root, text="Login", command=self.login).pack(pady=10)
+        # Button(self.root, text="Register", command=self.register_screen).pack()
+        button_frame = Frame(self.root)
+        button_frame.pack(pady=20)  # Center the frame horizontally
+        Button(button_frame, text="Login", command=self.login).pack(side='left', padx=10)
+        Button(button_frame, text="Register", command=self.register_screen).pack(side='left', padx=10)
+
 
     def register_screen(self):
         """
